@@ -1,18 +1,16 @@
 from flask import Flask, render_template, request, redirect
 import psycopg2
 from psycopg2.extras import RealDictCursor
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 app = Flask(__name__)
 
-# Connect to Neon PostgreSQL
-conn = psycopg2.connect(os.getenv("DATABASE_URL"), cursor_factory=RealDictCursor)
+# --- DIRECT NEON CONNECTION (NO .env NEEDED) ---
+NEON_DB_URL = 'postgresql://neondb_owner:npg_4XScJBP9FzqK@ep-old-violet-a4sjb9km-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+
+conn = psycopg2.connect(NEON_DB_URL, cursor_factory=RealDictCursor)
 cursor = conn.cursor()
 
-# Create table if not exists
+# Create table
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS notes (
     id SERIAL PRIMARY KEY,
