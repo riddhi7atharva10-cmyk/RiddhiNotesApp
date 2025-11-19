@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 style="text-align:center; margin-bottom:20px;">Your Notes</h2>
+
+<!-- Add Note -->
+<div class="card" style="background: rgba(255,255,255,0.05); padding:20px; border-radius:12px;">
+    <form action="/add" method="POST" style="display:flex; flex-direction:column; gap:10px;">
+        <input type="text" name="title" placeholder="Title" required
+               style="padding:10px; border-radius:10px; border:none; background:rgba(255,255,255,0.1); color:#fff;">
+        
+        <textarea name="content" placeholder="Write your note..." required
+                  style="padding:10px; height:120px; border-radius:10px; background:rgba(255,255,255,0.1); color:#fff;"></textarea>
+
+        <button class="btn-primary" style="border-radius:10px;">Add Note</button>
+    </form>
+</div>
+
+<!-- Notes Grid -->
+<div style="margin-top:30px; display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px;">
+
+    {% for note in notes %}
+    <div class="card" style="background:rgba(255,255,255,0.05); padding:20px; border-radius:12px;">
+        <h3 style="color:#00ffff;">{{ note.title }}</h3>
+        <p style="color:#ccc;">{{ note.content }}</p>
+
+        <div style="margin-top:15px; display:flex; gap:10px;">
+            <a href="/edit/{{ note._id }}" class="btn-primary" 
+               style="text-decoration:none; padding:10px 20px; border-radius:8px;">Edit</a>
+
+            <a href="/delete/{{ note._id }}" class="btn-secondary"
+               style="text-decoration:none; padding:10px 20px; border-radius:8px;">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+

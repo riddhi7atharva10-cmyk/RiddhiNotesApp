@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Riddhi Notes App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Background animation -->
+    <div class="bg-animation">
+        <div class="neural-network"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <a href="/" class="logo">
+                <span class="logo-text">Riddhi Notes WebApp</span>
+            </a>
+        </nav>
+    </header>
+
+    <main style="margin-top:100px; max-width:900px; margin-left:auto; margin-right:auto;">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>
+
